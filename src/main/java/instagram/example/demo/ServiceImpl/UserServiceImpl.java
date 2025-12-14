@@ -11,14 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-// Human-style service code with inline comments
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    // Simple password encoder
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
@@ -28,15 +26,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Email is already taken!");
         }
 
-        // Check if username exists
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already taken!");
         }
 
-        // Hash password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Save user
         return userRepository.save(user);
     }
 
@@ -48,8 +43,6 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userOpt.get();
-
-        // Check password
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Wrong password!");
         }
@@ -65,11 +58,9 @@ public class UserServiceImpl implements UserService {
         User them = userRepository.findById(followUserId)
                 .orElseThrow(() -> new RuntimeException("User to follow not found!"));
 
-        // Add to following/followers sets
         me.getFollowing().add(them.getId());
         them.getFollowers().add(me.getId());
 
-        // Save both users
         userRepository.save(them);
         return userRepository.save(me);
     }
@@ -81,8 +72,6 @@ public class UserServiceImpl implements UserService {
 
         User them = userRepository.findById(unfollowUserId)
                 .orElseThrow(() -> new RuntimeException("User to unfollow not found!"));
-
-        // Remove from following/followers sets
         me.getFollowing().remove(them.getId());
         them.getFollowers().remove(me.getId());
 

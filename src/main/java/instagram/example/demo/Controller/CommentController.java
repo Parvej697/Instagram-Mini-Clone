@@ -19,19 +19,18 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    // Add a comment
     @PostMapping
     public Comment addComment(@RequestBody Comment comment) {
         return commentService.addComment(comment);
     }
 
-    // Get comments for a post
+
     @GetMapping("/post/{postId}")
     public List<Comment> getCommentsByPost(@PathVariable String postId) {
         return commentService.getCommentsByPostId(postId);
     }
 
-    // Delete a comment
+
     @DeleteMapping("/{commentId}")
     public void deleteComment(@PathVariable String commentId) {
         commentService.deleteComment(commentId);

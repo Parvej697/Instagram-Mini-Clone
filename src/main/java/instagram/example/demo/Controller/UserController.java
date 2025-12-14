@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    // Signup
+
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
         try {
@@ -47,7 +47,6 @@ public class UserController {
         }
     }
 
-    // Follow (JWT required)
     @PostMapping("/follow/{followUserId}")
     public User follow(HttpServletRequest request,
                        @PathVariable String followUserId) {
@@ -56,7 +55,7 @@ public class UserController {
         return userService.followUser(userId, followUserId);
     }
 
-    // Unfollow
+
     @PostMapping("/unfollow/{unfollowUserId}")
     public User unfollow(HttpServletRequest request,
                          @PathVariable String unfollowUserId) {

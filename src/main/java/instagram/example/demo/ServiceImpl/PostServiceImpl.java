@@ -37,7 +37,6 @@ public class PostServiceImpl implements instagram.example.demo.Services.PostServ
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
 
-        // Toggle like (like/unlike)
         if (post.getLikes().contains(userId)) {
             post.getLikes().remove(userId);
         } else {

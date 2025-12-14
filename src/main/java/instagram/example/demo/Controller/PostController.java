@@ -21,25 +21,25 @@ public class PostController {
         this.postService = postService;
     }
 
-    // Create post
+
     @PostMapping
     public Post createPost(@RequestBody Post post) {
         return postService.createPost(post);
     }
 
-    // Get all posts
+
     @GetMapping
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
 
-    // Get posts by user
+
     @GetMapping("/user/{userId}")
     public List<Post> getPostsByUser(@PathVariable String userId) {
         return postService.getPostsByUserId(userId);
     }
 
-    // Like / Unlike post
+
     @PutMapping("/{postId}/like/{userId}")
     public Post likePost(
             @PathVariable String postId,

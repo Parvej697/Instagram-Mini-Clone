@@ -6,17 +6,13 @@ import instagram.example.demo.Entity.User;
 import java.util.List;
 import java.util.Optional;
 
-// Just basic user operations
 public interface UserService {
-    User signup(User user);  // Register new user
+    User signup(User user);
 
-    Optional<User> login(String email, String password);  // Login
+    Optional<User> login(String email, String password);
+    User followUser(String userId, String followUserId);
+    User unfollowUser(String userId, String unfollowUserId);
 
-    User followUser(String userId, String followUserId);  // Follow
+    Optional<User> getUserById(String id);
 
-    User unfollowUser(String userId, String unfollowUserId); // Unfollow
-
-    Optional<User> getUserById(String id);  // Get user info
-
-    List<User> getAllUsers();  // List all users
-}
+    List<User> getAllUsers();  }
